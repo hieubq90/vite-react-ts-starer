@@ -1,32 +1,24 @@
-import { useState } from 'react'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import NotFound from './pages/NotFound'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export function App() {
   return (
-    <div className="App">
-      <div className="flex flex-row justify-center">
-        <a href="https://vitejs.dev" target="_blank">
-          <MyIconsVite />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <MyIconsReact />
-        </a>
+    <div className="app">
+      <div className="app-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
-      <h1 className="text-3xl font-bold underline">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
 
-export default App
+export default function WrappedApp() {
+  return (
+    <HashRouter>
+      <App />
+    </HashRouter>
+  )
+}
